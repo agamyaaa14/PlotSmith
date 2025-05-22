@@ -40,3 +40,4 @@ if __name__ == "__main__":
     user_prompt = "A woman vanishes after entering a mirror maze at the fair."
     story = generate_story(genre, user_prompt)
     print("\n📖 Your Story\n", story)
+    
