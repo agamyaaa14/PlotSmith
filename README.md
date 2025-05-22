@@ -40,7 +40,7 @@ PlotSmith/
 ├── story_generator.py        # Logic for generating stories via API
 ├── assets/
 │   ├── ps1.png               # Logo used in app
-    ├── ps2.png         
+|    ├── ps2.png         
 │   └── ps2-nobg.png       
 ├── requirements.txt          # Python dependencies
 └── prompts_to_try.txt        # Example prompts for each genre
