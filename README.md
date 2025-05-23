@@ -6,9 +6,9 @@
 
 ---
 
-## 📚 Features
+## 💡 Features
 
--  Supports multiple genres (Mystery, Fantasy, Sci-Fi, Horror, Romance, Detective, Thriller, and more)
+-  Supports multiple genres (Mystery, Fantasy, Sci-Fi, Horror, Romance, Detective, Thriller, Adventure)
 -  Input a custom story prompt
 -  Generates coherent, short story paragraphs instantly
 -  Beautiful UI with dark theme and logo integration
@@ -21,12 +21,49 @@
 | Component        | Technology                        |
 |------------------|-----------------------------------|
 | UI               | Streamlit                         |
-| Backend Model    | `HuggingFaceH4/zephyr-7b-beta`    |
+| Backend Model    | `microsoft/phi-4`                 |
 | API              | Hugging Face Inference API        |
 | Styling          | Custom CSS                        |
 | Environment Vars | Python `dotenv`                   |
 | Deployment       | Streamlit Community Cloud         |
 
+---
+## 🛠️ How to Run Locally
+
+Follow these steps to set up and run PlotSmith on your local machine.
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/agamyaaa14/PlotSmith.git
+cd PlotSmith
+```
+### 2. Set Up a Virtual Environment
+Use a virtual environment to manage dependencies.
+```bash
+# For Windows
+python -m venv venv
+venv\Scripts\activate
+
+# For macOS/Linux
+python3 -m venv venv
+source venv/bin/activate
+```
+### 3. Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+### 4. Configure Environment Variables
+Create a .env file in the root directory and add your Hugging Face API token:
+```bash
+HF_API_KEY=your_huggingface_api_token
+```
+⚠️ **Note:** Do not share your token publicly. This file is already ignored in `.gitignore`.
+
+### 5. Run the App
+```bash
+streamlit run app.py
+```
 ---
 
 ## 📂 File Structure
@@ -40,7 +77,8 @@ PlotSmith/
 ├── story_generator.py        # Logic for generating stories via API
 ├── assets/
 │   ├── ps1.png               # Logo used in app
-│   ├── ps2.png         
+│   ├── ps2.png
+│   ├── screenshot.png    
 │   └── ps2-nobg.png       
 ├── requirements.txt          # Python dependencies
 └── prompts_to_try.txt        # Example prompts for each genre
@@ -53,9 +91,13 @@ PlotSmith/
 ![logo](images/ps2.png)
 
 ---
+## 📸 Sample Screenshot
+
+![Deployed App Screenshot](images/screenshot.png)
+
+----
 
 ## ✅ Future Improvements
-
 - Save stories to PDF or text  
 - Add user login and favorites  
 - Custom tone/style selection (humorous, dark, poetic, etc.)
