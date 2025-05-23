@@ -24,6 +24,7 @@ venv/
 *.sqlite
 
 # Environment files
-.env
+
+
 
 tk.txt
