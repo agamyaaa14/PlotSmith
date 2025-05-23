@@ -64,6 +64,7 @@ HF_API_KEY=your_huggingface_api_token
 ```bash
 streamlit run app.py
 ```
+
 ---
 
 ## 📂 File Structure
@@ -93,7 +94,7 @@ PlotSmith/
 ---
 ## 📸 Sample Screenshot
 
-![Deployed App Screenshot](images/screenshot.png)
+![Deployed App Screenshot](images/screenshot.jpg)
 
 ----
 
