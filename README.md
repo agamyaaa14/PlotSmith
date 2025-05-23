@@ -90,7 +90,7 @@ PlotSmith/
 🔗 [Deployed App](https://plotsmith.streamlit.app/)
 
 ![logo](images/ps2.png)
-
+⚠️ *If no story appears on the app, it might be due to the hosting account’s API token reaching its usage limit. Please try again later.*
 ---
 ## 📸 Sample Screenshot
 
