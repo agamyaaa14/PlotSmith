@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 import os
 
-hf_token = os.getenv("HUGGINGFACE_API_TOKEN")
+hf_token = os.getenv("HF_API_KEY")
 if not hf_token:
     st.error("API token not set!")
 else:
