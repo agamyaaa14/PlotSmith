@@ -10,18 +10,6 @@ icon = Image.open("images/ps2-nobg.png")
 # Page config
 st.set_page_config(page_title="PlotSmith - Short Story Generator", page_icon=icon, layout="centered")
 
-# Genre icons
-genre = {
-    "Mystery",
-    "Fantasy",
-    "Sci-Fi",
-    "Adventure",
-    "Horror",
-    "Detective",
-    "Romance",
-    "Thriller"
-}
-
 # Custom CSS
 st.markdown(
     """
@@ -65,10 +53,10 @@ st.markdown(
         font-size: 14px;
     }
     label[data-testid="stWidgetLabel"] {
-            color: white !important;
-            font-size: 30px !important;
-            margin-bottom: 4px !important;
-        }
+        color: white !important;
+        font-size: 30px !important;
+        margin-bottom: 4px !important;
+    }
     </style>
     """,
     unsafe_allow_html=True
@@ -77,18 +65,21 @@ st.markdown(
 # Show top logo
 st.image(header_img, use_container_width=True)
 
-# --- Genre Input ---
-genre = st.selectbox("Select Genre", ["Mystery", "Fantasy", "Sci-Fi", "Adventure", "Horror", "Detective", "Romance", "Thriller"])
+# Genre list
+genre = st.selectbox("Select Genre", [
+    "Mystery", "Fantasy", "Sci-Fi", "Adventure",
+    "Horror", "Detective", "Romance", "Thriller"
+])
 
-# --- Prompt Input ---
+# Prompt Input
 user_prompt = st.text_input("Enter your story prompt", placeholder="E.g. A detective finds a strange letter inside a locked room.")
 
-
-# --- Generate Story Button ---
+# Generate Story
 if st.button("Generate Story"):
     if user_prompt.strip():
         with st.spinner("Generating your story..."):
-            story = generate_story(genre, user_prompt)
+            full_prompt = f"Genre: {genre}\nPrompt: {user_prompt}\nStory:"
+            story = generate_story(full_prompt)
             time.sleep(1.3)
 
         story_box = st.empty()
@@ -101,7 +92,7 @@ if st.button("Generate Story"):
             )
             time.sleep(0.005)
 
-        # Footer message with white heart
+        # Footer
         st.markdown('<div class="footer">Made with 🤍 using PlotSmith</div>', unsafe_allow_html=True)
     else:
         st.error("Please enter a prompt to generate a story.")
