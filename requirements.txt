@@ -3,3 +3,4 @@ transformers
 torch
 python-dotenv
 huggingface_hub
+requests>=2.26.0
