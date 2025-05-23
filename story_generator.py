@@ -1,43 +1,31 @@
 import os
+import requests
 from dotenv import load_dotenv
-from huggingface_hub import InferenceClient
 
-# ✅ Load API key
 load_dotenv()
-hf_token = os.getenv("HF_API_KEY")
+HF_TOKEN = os.getenv("HF_API_KEY")
 
-# ✅ Use free-tier safe model (not Nebius)
-client = InferenceClient(
-    model="HuggingFaceH4/zephyr-7b-beta",
-    token=hf_token,
-)
+API_URL = "https://api-inference.huggingface.co/models/microsoft/phi-4"
+HEADERS = {"Authorization": f"Bearer {HF_TOKEN}"}
 
-def generate_story(genre: str, user_prompt: str) -> str:
+def generate_story(prompt):
+    payload = {
+        "inputs": prompt,
+        "parameters": {
+            "max_new_tokens": 250,
+            "temperature": 0.8,
+            "top_p": 0.95,
+            "do_sample": True,
+        }
+    }
     try:
-        system_instruction = (
-            f"You are a short story writer. Write a very short and coherent story in the {genre} genre "
-            f"based on the given prompt. Do not use bullet points. Reply only with the story."
-        )
-
-        user_input = f"Genre: {genre}\nPrompt: {user_prompt.strip()}"
-
-        response = client.chat.completions.create(
-            messages=[
-                {"role": "system", "content": system_instruction},
-                {"role": "user", "content": user_input}
-            ]
-        )
-
-        return response.choices[0].message.content.strip()
-
+        response = requests.post(API_URL, headers=HEADERS, json=payload, timeout=60)
+        response.raise_for_status()
+        result = response.json()
+        if isinstance(result, list):
+            return result[0]["generated_text"].split("Story:")[-1].strip()
+        else:
+            return f"⚠️ API returned unexpected format: {result}"
     except Exception as e:
-        return f"❌ Error: {e}"
-
-
-# ✅ Test it directly
-if __name__ == "__main__":
-    genre = "Mystery"
-    user_prompt = "A woman vanishes after entering a mirror maze at the fair."
-    story = generate_story(genre, user_prompt)
-    print("\n📖 Your Story\n", story)
-    
+        print("❌ API error:", e)
+        return "❌ Error generating story. Please check your token or try again later."
