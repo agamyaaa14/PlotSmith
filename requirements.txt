@@ -2,6 +2,6 @@ streamlit
 python-dotenv
 huggingface_hub
 requests
-PIL
+Pillow
 requests
 openai
